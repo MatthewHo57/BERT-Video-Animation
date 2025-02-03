@@ -2,14 +2,13 @@ from manim import *
 
 class TestScene(Scene):
     def construct(self):
-        # Create text object
-        text = Text("Hello, Manim!")
-        
-        # Animate text appearance
-        self.play(Write(text))
-        
-        # Wait for 2 seconds
-        self.wait(2)
-        
-        # Fade out
-        self.play(FadeOut(text))
+
+        CPU_Square = Square()
+        CPU_Square.rotate(PI/4)
+
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Playing animation
+   
+        self.play(Create(CPU_Square))
+        self.play(Rotate(CPU_Square, PI/4))
