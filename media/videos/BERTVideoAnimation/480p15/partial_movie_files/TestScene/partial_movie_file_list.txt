@@ -1,4 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/BERTVideoAnimation/480p15/partial_movie_files/TestScene/1185818338_3960830650_223132457.mp4'
-file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/BERTVideoAnimation/480p15/partial_movie_files/TestScene/624642324_2408024828_2043558266.mp4'
-file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/BERTVideoAnimation/480p15/partial_movie_files/TestScene/624642324_3781389717_2949721856.mp4'

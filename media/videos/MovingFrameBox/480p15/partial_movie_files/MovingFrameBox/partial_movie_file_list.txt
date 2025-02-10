@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/MovingFrameBox/480p15/partial_movie_files/MovingFrameBox/1185818338_794583257_223132457.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/MovingFrameBox/480p15/partial_movie_files/MovingFrameBox/624642324_1420869240_1869793800.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/MovingFrameBox/480p15/partial_movie_files/MovingFrameBox/624642324_1754310298_3466229321.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/MovingFrameBox/480p15/partial_movie_files/MovingFrameBox/624642324_966719605_4261021080.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/MovingFrameBox/480p15/partial_movie_files/MovingFrameBox/624642324_1754310298_601638970.mp4'
