@@ -237,4 +237,5 @@ class VerticalBERT(Scene):
         self.play(FadeTransform(calc_complex, calc_simple))
 
         self.wait(1)
-        
+
+        # TESTING COMMMITS
