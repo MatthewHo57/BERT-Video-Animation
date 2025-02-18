@@ -1,0 +1,8 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/1185818338_475836159_2358810818.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/624642324_152685080_255990566.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/624642324_2182755019_4635007.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/624642324_3116623759_204832416.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/624642324_2094132510_3304292126.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/624642324_2015106682_2008873597.mp4'
+file 'file:/Users/matthewho/Documents/BERT Video Animation/media/videos/VerticalBERT/480p15/partial_movie_files/VerticalBERT/624642324_3024000721_2398516624.mp4'
