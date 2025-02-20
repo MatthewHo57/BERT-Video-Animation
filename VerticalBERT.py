@@ -238,4 +238,3 @@ class VerticalBERT(Scene):
 
         self.wait(1)
 
-        # TEST
