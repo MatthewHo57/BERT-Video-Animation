@@ -23,8 +23,6 @@ class VerticalBERT(Scene):
 
         arrow_3 = Arrow(buff= 0.05, start= 1.5 * UP, end= 2 * UP)
 
-        output_complex = VGroup(output, arrow_1, softmax, arrow_2, linear, arrow_3)
-
         # ADD & NORM
         add_norm_text = Text("Add & Norm", font = "Arial").scale(0.25).shift(1.4 * UP)
         add_norm_box = SurroundingRectangle(add_norm_text, color= YELLOW)
@@ -108,8 +106,6 @@ class VerticalBERT(Scene):
         # INPUTS
         inputs = Text("Inputs", font= "Arial").scale(0.25).shift(2.9 * DOWN)
 
-        inputs_complex = VGroup(plus_sign, line_d, pos_enc_circle, arc_e, arc_f, arrow_6, input_embedding, arrow_7, inputs)
-
         vertical_BERT = VGroup(output, arrow_1, softmax, arrow_2, linear,
                                 arrow_3, add_norm_1, feed_forward, arrow_4, line_a, arc_a,
                                 add_norm_2, multi_head_attention, arrow_5, line_b, arc_b, arc_c, line_c, arc_d, Nx_box,
@@ -138,8 +134,6 @@ class VerticalBERT(Scene):
 
         # OUTPUTS
         output_simple = Text("Output", font= "Arial", color= WHITE).scale(0.25).shift(2.4 * UP + 3 * RIGHT)
-
-        vertical_BERT_simple = VGroup(inputs_simple, arrow_8, calc_1, arrow_9, calc_2, arrow_10, calc_3, arrow_11, calc_box, output_simple)
 
 
         # --- Transitions --- #
