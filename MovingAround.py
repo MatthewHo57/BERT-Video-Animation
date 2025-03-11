@@ -1,10 +1,11 @@
 from manim import *
 
-class MovingAround(Scene):
+class MovingCameraCenter(MovingCameraScene):
     def construct(self):
-        square = Square(color=BLUE, fill_opacity=1)
-
-        self.play(square.animate.shift(LEFT))
-        self.play(square.animate.set_fill(ORANGE))
-        self.play(square.animate.scale(0.3))
-        self.play(square.animate.rotate(0.4))
+        s = Square(color=RED, fill_opacity=0.5).move_to(2 * LEFT)
+        t = Triangle(color=GREEN, fill_opacity=0.5).move_to(2 * RIGHT)
+        self.wait(0.3)
+        self.add(s, t)
+        self.play(self.camera.frame.animate.move_to(s))
+        self.wait(0.3)
+        self.play(self.camera.frame.animate.move_to(t))

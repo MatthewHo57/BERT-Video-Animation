@@ -1,29 +1,35 @@
 from manim import *
 
-class CompressingBERT(Scene):
+class BoxCompression(Scene):
     def construct(self):
-        # Start position of the first square
-        start_x = -6  
-        y_pos = 0  
-        square_size = 1  # Size of the square
-        num_squares = 12  # Total squares to generate
-        shift_right = 2  # Distance between squares
-        camera_shift = 2  # Camera movement per step
-
-        # Create a list to hold squares
-        squares = []
+        # Define the number of boxes
+        num_boxes = 5
+        box_width = 2
+        spacing = 2.5  # Initial spacing between boxes
         
-        # Create squares one by one
-        for i in range(num_squares):
-            new_square = Square(side_length=square_size, color=BLUE).move_to([start_x + i * shift_right, y_pos, 0])
-            squares.append(new_square)
-            
-            # Add animation for square appearance
-            self.play(FadeIn(new_square), run_time=0.5)
-
-            # Start shifting camera after the 10th square
-            if i >= 10:
-                self.play(self.camera.frame.animate.shift(RIGHT * camera_shift), run_time=0.5)
-
-        # Hold the final frame
+        # Create boxes and text labels
+        boxes = []
+        texts = []
+        for i in range(num_boxes):
+            box = Square(side_length=box_width, color=BLUE).shift(RIGHT * (i * spacing))
+            text = Text(f"Box {i+1}", font_size=24).move_to(box.get_center())
+            boxes.append(box)
+            texts.append(text)
+            self.add(box, text)
+        
+        # Animate compression
+        animations = []
+        for i in range(1, num_boxes):
+            animations.append(
+                AnimationGroup(
+                    boxes[i].animate.move_to(boxes[0].get_center()),  # Move to first box
+                    FadeOut(texts[i]),  # Fade out text
+                    lag_ratio=0.5
+                )
+            )
+        
+        # Play the animation sequentially
+        self.play(*animations, run_time=4)
+        
+        # Keep the final state
         self.wait(2)
