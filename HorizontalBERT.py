@@ -20,71 +20,16 @@ class HorizontalBERT(MovingCameraScene):
         point_r = Dot(1 * UP + 2 * RIGHT)
         point_s = Dot(1 * DOWN + 2 * LEFT)
         horizontal_vgroup = VGroup()
+        box_dic = {}
 
-
-        # --- Creating HorizontalBERT Prototyping --- #
-        # shift_count = -3.5
-        # point_r = Dot(1 * UP + 1.5 * RIGHT)
-        # point_s = Dot(1 * DOWN + 1.5 * LEFT)
-
-
-        # for box in horizontal_boxes:
-            
-        #     input_horizontal = Text("Input: ", color= WHITE).scale(0.4).shift(0.9 * UP + 2.8 * LEFT)
-        #     self.add(input_horizontal)
-        #     input_horizontal.shift(shift_count * RIGHT)
-
-        #     calc_1_horizontal = Text("Calc 1: ", color= WHITE).scale(0.4).shift(0.85 * UP + 1.2 * LEFT)
-        #     self.add(calc_1_horizontal)
-        #     calc_1_horizontal.shift(shift_count * RIGHT)
-        #     calc_2_horizontal = Text("Calc 2: ", color= WHITE).scale(0.4).shift(0.85 * DOWN + 1.2 * LEFT)
-        #     self.add(calc_2_horizontal)
-        #     calc_2_horizontal.shift(shift_count * RIGHT)
-        #     calc_3_horizontal = Text("Calc 3: ", color= WHITE).scale(0.4).shift(0.85 * UP + 0.5 * RIGHT)
-        #     self.add(calc_3_horizontal)
-        #     calc_3_horizontal.shift(shift_count * RIGHT)
-
-        #     arrow_1_horizontal = Arrow(buff= 0.05, start= 0.5 * UP + 3 * LEFT, end= 0.5 * UP + 1.8 * LEFT, stroke_width= 2, max_tip_length_to_length_ratio=0.12)
-        #     arrow_1_horizontal.shift(shift_count * RIGHT)
-        #     self.add(arrow_1_horizontal)
-        #     arrow_2_horizontal = Arrow(buff= 0.05, start= 0.65 * UP + 1 * LEFT, end= 0.65 * DOWN + 1 * LEFT, stroke_width= 2, max_tip_length_to_length_ratio=0.12)
-        #     arrow_2_horizontal.shift(shift_count * RIGHT)
-        #     self.add(arrow_2_horizontal)
-        #     arrow_3_horizontal = Arrow(buff= 0.05, start= 0.65 * DOWN + 0.7 * LEFT, end= 0.65 * UP + 0.7 * RIGHT, stroke_width= 2, max_tip_length_to_length_ratio=0.08)
-        #     arrow_3_horizontal.shift(shift_count * RIGHT)
-        #     self.add(arrow_3_horizontal)
-
-
-        #     weight_1_value = weight_1.pop().shift(0.5 * LEFT + 0.84 * UP)
-        #     weight_1_value.shift(shift_count * RIGHT)
-        #     self.add(weight_1_value)
-
-        #     weight_2_value = weight_2.pop().shift(0.45 * LEFT + 0.85 * DOWN)
-        #     weight_2_value.shift(shift_count * RIGHT)
-        #     self.add(weight_2_value)
-
-        #     weight_3_value = weight_3.pop().shift(1.1 * RIGHT + 0.85 * UP)
-        #     weight_3_value.shift(shift_count * RIGHT)
-        #     self.add(weight_3_value)
-
-        #     input_value = inputs_outputs.pop().shift(2.3 * LEFT + 0.85 * UP)
-        #     input_value.shift(shift_count * RIGHT)
-        #     self.add(input_value)
-
-        #     box = SurroundingRectangle(point_r, point_s, color= WHITE, stroke_width= 2).shift(shift_count * RIGHT)
-        #     self.add(box)
-
-        #     shift_count += 6
-    
 
 
         # --- Playing Animations --- #
      
         shift_count = -3.25
-
-        for box in horizontal_boxes:
+        
+        for i, _ in enumerate(horizontal_boxes, start=1):
             
-
             input_horizontal = Text("Input: ", color= WHITE).scale(0.4).shift(0.8 * UP + 3.1 * LEFT)
             input_horizontal.shift(shift_count * RIGHT)
             
@@ -119,9 +64,10 @@ class HorizontalBERT(MovingCameraScene):
 
             box = SurroundingRectangle(point_r, point_s, color= WHITE, stroke_width= 2).shift(shift_count * RIGHT)
             
-
+            
             horizontal_vgroup.add(box, arrow_1_horizontal, arrow_2_horizontal, arrow_3_horizontal, calc_1_horizontal, calc_2_horizontal, calc_3_horizontal, input_horizontal, weight_1_value, weight_2_value, weight_3_value, input_value)
             shift_count += 6
+            box_dic[f"box_{i}"] = VGroup(box, arrow_1_horizontal, arrow_2_horizontal, arrow_3_horizontal, calc_1_horizontal, calc_2_horizontal, calc_3_horizontal, input_horizontal, weight_1_value, weight_2_value, weight_3_value, input_value)
 
 
             self.play(AnimationGroup(Create(arrow_1_horizontal), Create(input_horizontal), FadeIn(input_value), Create(calc_1_horizontal), FadeIn(weight_1_value), Create(arrow_2_horizontal), Create(calc_2_horizontal), FadeIn(weight_2_value), Create(arrow_3_horizontal), Create(calc_3_horizontal), FadeIn(weight_3_value), Create(box),
@@ -133,8 +79,7 @@ class HorizontalBERT(MovingCameraScene):
 
         last_output = Text("Output: 57", color= WHITE).scale(0.4).shift(0.8 * UP + 23.8 * RIGHT)
         arrow_4_horizontal = Arrow(buff= 0.05, start= 0.35 * UP + 23.1 * RIGHT, end= 0.35 * UP + 24.45 * RIGHT, stroke_width= 2, max_tip_length_to_length_ratio= 0.12)
-        self.add(arrow_4_horizontal)
-        self.add(last_output)
+        self.play(Create(last_output), Create(arrow_4_horizontal))
         horizontal_vgroup.add(arrow_4_horizontal, last_output)
 
 
@@ -174,7 +119,18 @@ class HorizontalBERT(MovingCameraScene):
             self.play(self.camera.frame.animate.move_to(shift_count * RIGHT))
 
 
+
+
+        # --- WAITING WAITING WAITING --- #
+
+        # self.wait(20)
+
+
+
+
         self.wait(1)
-        self.play(self.camera.frame.animate.move_to(ORIGIN), run_time= 10)
+        self.play(box_dic["box_5"].animate.shift(24 * LEFT), self.camera.frame.animate.move_to(ORIGIN), rate_func= linear, run_time= 15)
         self.wait(1)
+
+        
         
