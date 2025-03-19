@@ -1,7 +1,8 @@
 from manim import *
 
-class VerticalBERT(Scene):
+class VerticalBERT(MovingCameraScene):
     def construct(self):
+        self.camera.frame.save_state()
         
         # --- Creating VerticalBERT Complex --- #
         # OUTPUT
