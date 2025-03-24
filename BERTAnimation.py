@@ -2,7 +2,6 @@ from manim import *
 
 class BERTAnimation(MovingCameraScene):
     def construct(self):
-        self.camera.frame.save_state()
         
         # --- Creating VerticalBERT Complex --- #
         # OUTPUT
@@ -177,8 +176,9 @@ class BERTAnimation(MovingCameraScene):
 
 
         # --- Creating VerticalBERT Simple --- #
-
-        self.play(vertical_BERT.copy().animate.shift(3 * LEFT), vertical_BERT.animate.shift(3.5 * RIGHT))
+        
+        vertical_BERT_copy = vertical_BERT.copy()
+        self.play(vertical_BERT_copy.animate.shift(3 * LEFT), vertical_BERT.animate.shift(3.5 * RIGHT))
 
         self.play(Create(big_arrow_1), Create(big_arrow_2), Create(big_arrow_3))
 
@@ -192,12 +192,10 @@ class BERTAnimation(MovingCameraScene):
         self.play(Transform(inputs, inputs_simple))
         self.play(FadeTransform(calc_complex, calc_simple))
 
-        self.wait(1)
-
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         # --- TRANSITION TO HORIZONTAL BERT --- #
-        self.remove(vertical_BERT)
+        self.play(FadeOut(vertical_BERT_copy), FadeOut(big_arrow_1), FadeOut(big_arrow_2), FadeOut(big_arrow_3), run_time= 2)
 
         self.wait(1)
