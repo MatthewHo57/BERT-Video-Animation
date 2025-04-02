@@ -2,11 +2,10 @@ from manim import *
 
 class VerticalBERT(MovingCameraScene):
     def construct(self):
-        self.camera.frame.save_state()
         
         # --- Creating VerticalBERT Complex --- #
         # OUTPUT
-        output = Text("Output", font="Arial").scale(0.25).shift(3.55 * UP)
+        output = Text("Output", font = "Arial").scale(0.25).shift(3.55 * UP)
 
         arrow_1 = Arrow(buff= 0.05, start= 3 * UP, end= 3.45 * UP)
         
@@ -105,7 +104,7 @@ class VerticalBERT(MovingCameraScene):
         arrow_7 = Arrow(buff= 0.05, start= 2.7 * DOWN, end= 2.2 * DOWN)
 
         # INPUTS
-        inputs = Text("Inputs", font= "Arial").scale(0.25).shift(2.9 * DOWN)
+        inputs = Text("Inputs", font= "Arial").scale(0.25).shift(2.85 * DOWN)
 
         vertical_BERT = VGroup(output, arrow_1, softmax, arrow_2, linear,
                                 arrow_3, add_norm_1, feed_forward, arrow_4, line_a, arc_a,
@@ -114,7 +113,10 @@ class VerticalBERT(MovingCameraScene):
                                 arrow_6, input_embedding, arrow_7, inputs)
 
 
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         # --- Creating VerticalBERT Simple --- #
+
         # INPUTS
         inputs_simple = Text("Inputs", font= "Arial", color= WHITE).scale(0.25).shift(1.6 * DOWN + 3 * RIGHT)
 
@@ -137,61 +139,16 @@ class VerticalBERT(MovingCameraScene):
         output_simple = Text("Output", font= "Arial", color= WHITE).scale(0.25).shift(2.4 * UP + 3 * RIGHT)
 
 
-        # --- Transitions --- #
+        # --- Big Purple Arrows --- #
         big_arrow_1 = Arrow(buff= 0, start= 1.425 * UP + 1 * LEFT, end= 1.425 * UP + 1.7 * RIGHT, color= PURPLE_D)
         big_arrow_2 = Arrow(buff= 0, start= 0.425 * UP + 1 * LEFT, end= 0.425 * UP + 1.7 * RIGHT, color= PURPLE_D)
         big_arrow_3 = Arrow(buff= 0, start= 0.575 * DOWN + 1 * LEFT, end= 0.575 * DOWN + 1.7 * RIGHT, color= PURPLE_D)
 
 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# --- Creating VerticalBERT Simple Image --- #
 
-        # self.add(inputs_simple)
-        # self.add(arrow_8)
-        # self.add(calc_1)
-        # self.add(arrow_9)
-        # self.add(calc_2)
-        # self.add(arrow_10)
-        # self.add(calc_3)
-        # self.add(arrow_11)
-        # self.add(calc_box)
-        # self.add(output_simple)
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# --- Creating VerticalBERT Complicated Image --- #
-
-        # self.add(output)
-        # self.add(arrow_1)
-        # self.add(softmax)
-        # self.add(arrow_2)
-        # self.add(linear)
-        # self.add(arrow_3)
-        # self.add(add_norm_1)
-        # self.add(feed_forward)
-        # self.add(arrow_4)
-        # self.add(line_a)
-        # self.add(arc_a)
-        # self.add(add_norm_2)
-        # self.add(multi_head_attention)
-        # self.add(arrow_5)
-        # self.add(line_b)
-        # self.add(arc_b, arc_c)
-        # self.add(line_c)
-        # self.add(arc_d)
-        # self.add(Nx_box)
-        # self.add(plus_sign)
-        # self.add(line_d)
-        # self.add(pos_enc_circle)
-        # self.add(arc_e, arc_f)
-        # self.add(arrow_6)
-        # self.add(input_embedding)
-        # self.add(arrow_7)
-        # self.add(inputs)
-
-
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# --- Playing Animation --- #
+        # --- Playing VerticalBERT Animation --- #
 
         self.play(AnimationGroup(Create(inputs), Create(arrow_7),Create(input_embedding), Create(arrow_6),
                 lag_ratio= 0.5)
@@ -217,8 +174,11 @@ class VerticalBERT(MovingCameraScene):
 
         self.wait(1)
 
-        self.play(vertical_BERT.copy().animate.shift(3 * LEFT), vertical_BERT.animate.shift(3.5 * RIGHT))
 
+        # --- Creating VerticalBERT Simple --- #
+        
+        vertical_BERT_copy = vertical_BERT.copy()
+        self.play(vertical_BERT_copy.animate.shift(3 * LEFT), vertical_BERT.animate.shift(3.5 * RIGHT))
         self.play(Create(big_arrow_1), Create(big_arrow_2), Create(big_arrow_3))
 
         self.play(AnimationGroup(FadeOut(arrow_1), FadeOut(softmax), FadeOut(arrow_2), FadeOut(linear), FadeOut(arrow_3),
@@ -231,5 +191,53 @@ class VerticalBERT(MovingCameraScene):
         self.play(Transform(inputs, inputs_simple))
         self.play(FadeTransform(calc_complex, calc_simple))
 
+
+        # --- TRANSITION TO HORIZONTAL BERT --- #
+        self.play(FadeOut(vertical_BERT_copy), FadeOut(big_arrow_1), FadeOut(big_arrow_2), FadeOut(big_arrow_3), run_time= 2)
+
         self.wait(1)
 
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        # --- Creating HorizontalBERT Example --- #
+
+        input_horizontal_ex = Text("Input", color= WHITE).scale(0.4).shift(0.8 * UP + 6.35 * LEFT)
+        arrow_1_horizontal_ex = Arrow(buff= 0.05, start= 0.35 * UP + 6.9 * LEFT, end= 0.35 * UP + 5.55 * LEFT, stroke_width= 2, max_tip_length_to_length_ratio= 0.12)
+        input_horizontal_ex = VGroup(input_horizontal_ex, arrow_1_horizontal_ex)
+        
+        point_r = Dot(1 * UP + 1.25 * LEFT)
+        point_s = Dot(1 * DOWN + 5.25 * LEFT)
+        box_horizontal_ex = SurroundingRectangle(point_r, point_s, color= WHITE, stroke_width= 2)
+        calc_1_horizontal_ex = Text("Calc 1", color= WHITE).scale(0.4).shift(0.8 * UP + 4.85 * LEFT)
+        calc_2_horizontal_ex = Text("Calc 2", color= WHITE).scale(0.4).shift(0.8 * DOWN + 4.85 * LEFT)
+        calc_3_horizontal_ex = Text("Calc 3", color= WHITE).scale(0.4).shift(0.8 * UP + 2.55 * LEFT)
+        arrow_2_horizontal_ex = Arrow(buff= 0.05, start= 0.6 * UP + 4.8 * LEFT, end= 0.6 * DOWN + 4.8 * LEFT, stroke_width= 2, max_tip_length_to_length_ratio= 0.13)
+        arrow_3_horizontal_ex = Arrow(buff= 0.05, start= 0.85 * DOWN + 4.25 * LEFT, end= 0.6 * UP + 3 * LEFT, stroke_width= 2, max_tip_length_to_length_ratio= 0.085)
+        calc_horizontal_ex = VGroup(box_horizontal_ex, calc_1_horizontal_ex, calc_2_horizontal_ex, calc_3_horizontal_ex, arrow_2_horizontal_ex, arrow_3_horizontal_ex)
+
+        output_horizontal_ex = Text("Output", color= WHITE).scale(0.4).shift(0.8 * UP + 0.1 * LEFT)
+        arrow_4_horizontal_ex = Arrow(buff= 0.05, start= 0.35 * UP + 0.9 * LEFT, end= 0.35 * UP + 0.45 * RIGHT, stroke_width= 2, max_tip_length_to_length_ratio= 0.12)
+        output_horizontal_ex = VGroup(output_horizontal_ex, arrow_4_horizontal_ex)
+        
+
+        self.remove(inputs, output)
+        self.play(FadeTransform(inputs_simple, input_horizontal_ex), FadeTransform(calc_simple, calc_horizontal_ex), FadeTransform(output_simple, output_horizontal_ex),
+                  run_time= 2)
+        
+        self.wait(1)
+
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        
+        # --- STATS STATS STATS --- #
+
+
+        # --- WAITING WAITING WAITING --- #
+
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        self.play(FadeOut(input_horizontal_ex), FadeOut(calc_horizontal_ex), FadeOut(output_horizontal_ex), FadeOut(box_horizontal_ex))
+
+        self.wait(1)
