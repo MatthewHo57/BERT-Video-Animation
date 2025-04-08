@@ -184,35 +184,20 @@ class HorizontalBERT(MovingCameraScene):
 
         lpddr_text = Text("LPDDR", color= WHITE).scale(1).shift(2 * UP + 3 * RIGHT)
         lpddr_1_1 = Text("1", color= MAROON).scale(0.5).shift(2 * RIGHT + 1 * UP)
-        lpddr_1_1_copy = lpddr_1_1.copy()
         lpddr_1_2 = Text("8", color= MAROON).scale(0.5).shift(2 * RIGHT + 0.5 * UP)
-        lpddr_1_2_copy = lpddr_1_2.copy()
         lpddr_1_3 = Text("12", color= MAROON).scale(0.5).shift(2 * RIGHT + 0 * UP)
-        lpddr_1_3_copy = lpddr_1_3.copy()
         lpddr_2_1 = Text("2", color= GREEN).scale(0.5).shift(2.5 * RIGHT + 1 * UP)
-        lpddr_2_1_copy = lpddr_2_1.copy()
         lpddr_2_2 = Text("9", color= GREEN).scale(0.5).shift(2.5 * RIGHT + 0.5 * UP)
-        lpddr_2_2_copy = lpddr_2_2.copy()
         lpddr_2_3 = Text("2", color= GREEN).scale(0.5).shift(2.5 * RIGHT + 0 * UP)
-        lpddr_2_3_copy = lpddr_2_3.copy()
         lpddr_3_1 = Text("3", color= YELLOW).scale(0.5).shift(3 * RIGHT + 1 * UP)
-        lpddr_3_1_copy = lpddr_3_1.copy()
         lpddr_3_2 = Text("4", color= YELLOW).scale(0.5).shift(3 * RIGHT + 0.5 * UP)
-        lpddr_3_2_copy = lpddr_3_2.copy()
         lpddr_3_3 = Text("1", color= YELLOW).scale(0.5).shift(3 * RIGHT + 0 * UP)
-        lpddr_3_3_copy = lpddr_3_3.copy()
         lpddr_4_1 = Text("4", color= BLUE).scale(0.5).shift(3.5 * RIGHT + 1 * UP)
-        lpddr_4_1_copy = lpddr_4_1.copy()
         lpddr_4_2 = Text("6", color= BLUE).scale(0.5).shift(3.5 * RIGHT + 0.5 * UP)
-        lpddr_4_2_copy = lpddr_4_2.copy()
         lpddr_4_3 = Text("2", color= BLUE).scale(0.5).shift(3.5 * RIGHT + 0 * UP)
-        lpddr_4_3_copy = lpddr_4_3.copy()
         lpddr_5_1 = Text("5", color= ORANGE).scale(0.5).shift(4 * RIGHT + 1 * UP)
-        lpddr_5_1_copy = lpddr_5_1.copy()
         lpddr_5_2 = Text("9", color= ORANGE).scale(0.5).shift(4 * RIGHT + 0.5 * UP)
-        lpddr_5_2_copy = lpddr_5_2.copy()
         lpddr_5_3 = Text("7", color= ORANGE).scale(0.5).shift(4 * RIGHT + 0 * UP)
-        lpddr_5_3_copy = lpddr_5_3.copy()
 
     
         point_v = Dot(1.1 * UP + 1.9 * RIGHT)
@@ -238,9 +223,22 @@ class HorizontalBERT(MovingCameraScene):
         self.wait(1)
 
 
-        self.play(lpddr_1_1_copy.animate.move_to(point_x),
-                  lpddr_1_2_copy.animate.move_to(point_y),
-                  lpddr_1_3_copy.animate.move_to(point_z),
-                  rate_func= smoothstep, run_time= 1.5)
+
+        lpddr_copies = {}
+        for i in range(1, 6):
+            for j in range(1, 4):
+                var_name = f"lpddr_{i}_{j}"
+                copy_var = eval(var_name).copy()
+                lpddr_copies[(i, j)] = copy_var
+
+
         
-        self.wait(1)
+        for i in range(1, 6):
+            self.play(lpddr_copies[(i, 1)].animate.move_to(point_x),
+                lpddr_copies[(i, 2)].animate.move_to(point_y),
+                lpddr_copies[(i, 3)].animate.move_to(point_z),
+                rate_func= smoothstep, run_time= 1.5)
+            self.wait(1)
+
+
+        
