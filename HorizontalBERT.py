@@ -24,6 +24,7 @@ class HorizontalBERT(MovingCameraScene):
         box_dic = {}
         text_dic = {}
         colour_dic = {}
+        weight_dic = {}
 
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -75,6 +76,7 @@ class HorizontalBERT(MovingCameraScene):
             camera_shift += 6
             box_dic[f"box_{i}"] = VGroup(box)
             text_dic[f"text_{i}"] = VGroup(arrow_1_horizontal, arrow_2_horizontal, arrow_3_horizontal, calc_1_horizontal, calc_2_horizontal, calc_3_horizontal, input_horizontal, input_value, weight_1_value, weight_2_value, weight_3_value)
+            weight_dic[f"weight_{i}"] = VGroup(weight_1_value, weight_2_value, weight_3_value)
 
             self.play(AnimationGroup(Create(arrow_1_horizontal), Create(input_horizontal), FadeIn(input_value), Create(calc_1_horizontal), FadeIn(weight_1_value), Create(arrow_2_horizontal), Create(calc_2_horizontal), FadeIn(weight_2_value), Create(arrow_3_horizontal), Create(calc_3_horizontal), FadeIn(weight_3_value), Create(box),
             lag_ratio= 0.5, run_time= 5)
@@ -121,6 +123,7 @@ class HorizontalBERT(MovingCameraScene):
             camera_shift += 6
             colour_dic[f"colour_{i}"] = VGroup(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour)
             text_dic[f"text_{i}"].add(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour)
+            weight_dic[f"weight_{i}"].add(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour)
             horizontal_vgroup.add(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour)
 
             self.play(AnimationGroup(FadeIn(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour),
@@ -158,12 +161,86 @@ class HorizontalBERT(MovingCameraScene):
                 break
 
             self.remove(next_box, next_text, next_colour)
+        
+        weight_text_1 = [MathTex(r"\text{Input } \times ", color= WHITE).scale(0.5).shift(3.94 * LEFT + 0.77 * UP)]
+        weight_text_2 = [MathTex(r"\text{Calc 1 + }", color= WHITE).scale(0.5).shift(3.9 * LEFT + 0.81 * DOWN)]
+        weight_text_3 = [MathTex(r"\dfrac{\text{Calc 2}}{}", color= WHITE).scale(0.5).shift(1.65 * LEFT + 0.915 * UP)]
+        weight_text = VGroup(weight_text_1, weight_text_2, weight_text_3)
 
+        
         self.play(Restore(self.camera.frame), run_time= 5)
+
+        self.wait(1)
+
+        self.play(FadeTransform(weight_dic["weight_1"], weight_text))
+
+        self.wait(1)
+        
 
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         # --- Creating CompressedBERT --- #
 
-        lpddr_text = Text("LPDDR", color= WHITE).scale(1.5).shift(2 * UP + 3 * LEFT)
+        lpddr_text = Text("LPDDR", color= WHITE).scale(1).shift(2 * UP + 3 * RIGHT)
+        lpddr_1_1 = Text("1", color= MAROON).scale(0.5).shift(2 * RIGHT + 1 * UP)
+        lpddr_1_1_copy = lpddr_1_1.copy()
+        lpddr_1_2 = Text("8", color= MAROON).scale(0.5).shift(2 * RIGHT + 0.5 * UP)
+        lpddr_1_2_copy = lpddr_1_2.copy()
+        lpddr_1_3 = Text("12", color= MAROON).scale(0.5).shift(2 * RIGHT + 0 * UP)
+        lpddr_1_3_copy = lpddr_1_3.copy()
+        lpddr_2_1 = Text("2", color= GREEN).scale(0.5).shift(2.5 * RIGHT + 1 * UP)
+        lpddr_2_1_copy = lpddr_2_1.copy()
+        lpddr_2_2 = Text("9", color= GREEN).scale(0.5).shift(2.5 * RIGHT + 0.5 * UP)
+        lpddr_2_2_copy = lpddr_2_2.copy()
+        lpddr_2_3 = Text("2", color= GREEN).scale(0.5).shift(2.5 * RIGHT + 0 * UP)
+        lpddr_2_3_copy = lpddr_2_3.copy()
+        lpddr_3_1 = Text("3", color= YELLOW).scale(0.5).shift(3 * RIGHT + 1 * UP)
+        lpddr_3_1_copy = lpddr_3_1.copy()
+        lpddr_3_2 = Text("4", color= YELLOW).scale(0.5).shift(3 * RIGHT + 0.5 * UP)
+        lpddr_3_2_copy = lpddr_3_2.copy()
+        lpddr_3_3 = Text("1", color= YELLOW).scale(0.5).shift(3 * RIGHT + 0 * UP)
+        lpddr_3_3_copy = lpddr_3_3.copy()
+        lpddr_4_1 = Text("4", color= BLUE).scale(0.5).shift(3.5 * RIGHT + 1 * UP)
+        lpddr_4_1_copy = lpddr_4_1.copy()
+        lpddr_4_2 = Text("6", color= BLUE).scale(0.5).shift(3.5 * RIGHT + 0.5 * UP)
+        lpddr_4_2_copy = lpddr_4_2.copy()
+        lpddr_4_3 = Text("2", color= BLUE).scale(0.5).shift(3.5 * RIGHT + 0 * UP)
+        lpddr_4_3_copy = lpddr_4_3.copy()
+        lpddr_5_1 = Text("5", color= ORANGE).scale(0.5).shift(4 * RIGHT + 1 * UP)
+        lpddr_5_1_copy = lpddr_5_1.copy()
+        lpddr_5_2 = Text("9", color= ORANGE).scale(0.5).shift(4 * RIGHT + 0.5 * UP)
+        lpddr_5_2_copy = lpddr_5_2.copy()
+        lpddr_5_3 = Text("7", color= ORANGE).scale(0.5).shift(4 * RIGHT + 0 * UP)
+        lpddr_5_3_copy = lpddr_5_3.copy()
+
+    
+        point_v = Dot(1.1 * UP + 1.9 * RIGHT)
+        point_w = Dot(0.1 * DOWN + 4.1 * RIGHT)
+        lpddr_box = SurroundingRectangle(point_v, point_w, stroke_width= 2, color= WHITE)
+
+        point_x = Dot(0.8 * UP + 3.35 * LEFT)
+        point_y = Dot(0.8 * DOWN + 3.25 * LEFT)
+        point_z = Dot(0.6 * UP + 1.65 * LEFT)
+        
+        
+        
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        # --- Animating Weight-Swapping --- #
+        
+        self.play(Create(lpddr_text), Create(lpddr_1_1), Create(lpddr_1_2), Create(lpddr_1_3), Create(lpddr_2_1), Create(lpddr_2_2), Create(lpddr_2_3),
+                  Create(lpddr_3_1), Create(lpddr_3_2), Create(lpddr_3_3), Create(lpddr_4_1), Create(lpddr_4_2) ,Create(lpddr_4_3),
+                  Create(lpddr_5_1), Create(lpddr_5_2), Create(lpddr_5_3),
+                  Create(lpddr_box))
+        
+        self.wait(1)
+
+
+        self.play(lpddr_1_1_copy.animate.move_to(point_x),
+                  lpddr_1_2_copy.animate.move_to(point_y),
+                  lpddr_1_3_copy.animate.move_to(point_z),
+                  rate_func= smoothstep, run_time= 1.5)
+        
+        self.wait(1)
