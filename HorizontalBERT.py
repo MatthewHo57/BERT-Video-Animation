@@ -81,8 +81,8 @@ class HorizontalBERT(MovingCameraScene):
             input_dic[f"input_{i}"] = VGroup(input_value)
 
             self.play(AnimationGroup(Create(arrow_1_horizontal), Create(input_horizontal), FadeIn(input_value), Create(calc_1_horizontal), FadeIn(weight_1_value), Create(arrow_2_horizontal), Create(calc_2_horizontal), FadeIn(weight_2_value), Create(arrow_3_horizontal), Create(calc_3_horizontal), FadeIn(weight_3_value), Create(box),
-            lag_ratio= 0.5, run_time= 5)
-            )
+            lag_ratio= 0.5, run_time= 5))
+
             self.play(self.camera.frame.animate.move_to(camera_shift * RIGHT))
 
 
@@ -284,4 +284,3 @@ class HorizontalBERT(MovingCameraScene):
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        
