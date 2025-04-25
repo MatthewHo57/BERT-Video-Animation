@@ -1,4 +1,4 @@
-**Weight-Swapping of a BERT Model Animation**
+**BERT Weight-Swapping Animation on Untether AI Chips**
 
 
 These Python files are used to create an animation of the weight-swapping that a BERT model experiences on UAI cards
@@ -6,6 +6,11 @@ These Python files are used to create an animation of the weight-swapping that a
 Each Python file will output an .MP4 file of the assigned animation. To create these .MP4 files:
 1. Ensure you have installed all of the required Python libraries
 - Manim
+
 2. Type the following command into the console terminal:
 - For low-quality prototyping: manim -pql python_file_name.py scene_name
 - For medium-quality: manim -pqm python_file_name.py scene_name
+- For high-quality: manim -pqh python_file_name.py scene_name
+- For 4K-quality: manim -pqk python_file_name.py scene_name
+
+3. After the .mp4 file is compiled, it will automatically pop-up as a playable file
