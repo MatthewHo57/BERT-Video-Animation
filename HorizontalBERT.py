@@ -71,14 +71,14 @@ class HorizontalBERT(MovingCameraScene):
 
             box = SurroundingRectangle(point_t, point_u, color= WHITE, stroke_width= 2).shift(shift_count * RIGHT)
             
-            
-            horizontal_vgroup.add(box, arrow_1_horizontal, arrow_2_horizontal, arrow_3_horizontal, calc_1_horizontal, calc_2_horizontal, calc_3_horizontal, input_horizontal, weight_1_value, weight_2_value, weight_3_value, input_value)
             shift_count += 6
             camera_shift += 6
+
             box_dic[f"box_{i}"] = VGroup(box)
             text_dic[f"text_{i}"] = VGroup(arrow_1_horizontal, arrow_2_horizontal, arrow_3_horizontal, calc_1_horizontal, calc_2_horizontal, calc_3_horizontal, input_horizontal, input_value, weight_1_value, weight_2_value, weight_3_value)
             weight_dic[f"weight_{i}"] = VGroup(weight_1_value, weight_2_value, weight_3_value)
             input_dic[f"input_{i}"] = VGroup(input_value)
+            horizontal_vgroup.add(box, arrow_1_horizontal, arrow_2_horizontal, arrow_3_horizontal, calc_1_horizontal, calc_2_horizontal, calc_3_horizontal, input_horizontal, weight_1_value, weight_2_value, weight_3_value, input_value)
 
             self.play(AnimationGroup(Create(arrow_1_horizontal), Create(input_horizontal), FadeIn(input_value), Create(calc_1_horizontal), FadeIn(weight_1_value), Create(arrow_2_horizontal), Create(calc_2_horizontal), FadeIn(weight_2_value), Create(arrow_3_horizontal), Create(calc_3_horizontal), FadeIn(weight_3_value), Create(box),
             lag_ratio= 0.5, run_time= 5))
@@ -94,7 +94,7 @@ class HorizontalBERT(MovingCameraScene):
 
 
         self.wait(1)
-        self.play(self.camera.frame.animate.move_to(ORIGIN), run_time= 10)
+        self.play(self.camera.frame.animate.move_to(ORIGIN), run_time= 7, rate_func= smoothstep)
         self.wait(1)
 
         
@@ -129,16 +129,15 @@ class HorizontalBERT(MovingCameraScene):
             horizontal_vgroup.add(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour)
 
             self.play(AnimationGroup(FadeIn(weight_1_value_colour, weight_2_value_colour, weight_3_value_colour),
-            lag_ratio= 0.9, run_time= 1))
+            lag_ratio= 0.9, run_time= 0.75))
 
-            self.play(self.camera.frame.animate.move_to(camera_shift * RIGHT))
+            self.play(self.camera.frame.animate.move_to(camera_shift * RIGHT), rate_func= smoothstep)
 
 
 
         # --- WAITING WAITING WAITING --- #
 
         # self.wait(20)
-
 
         # --- Compressing HorizontalBERT Traditional --- #
 
@@ -171,21 +170,15 @@ class HorizontalBERT(MovingCameraScene):
 
         self.wait(1)
 
+
+        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        # --- Creating CompressedBERT Example --- #
+        
         weight_text_1 = [MathTex(r"\text{Input } \times ", color= WHITE).scale(0.5).shift(3.94 * LEFT + 0.77 * UP)]
         weight_text_2 = [MathTex(r"\text{Calc 1 + }", color= WHITE).scale(0.5).shift(3.9 * LEFT + 0.81 * DOWN)]
         weight_text_3 = [MathTex(r"\dfrac{\text{Calc 2}}{}", color= WHITE).scale(0.5).shift(1.65 * LEFT + 0.915 * UP)]
         weight_text = VGroup(weight_text_1, weight_text_2, weight_text_3)
-
-        # Removing 1st set of weight values to begin the animation to show data running
-        self.play(FadeTransform(weight_dic["weight_1"], weight_text))
-
-        self.wait(1)
-        
-
-
-        # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        # --- Creating CompressedBERT --- #
 
         lpddr_text = Text("LPDDR", color= WHITE).scale(1).shift(2 * UP + 3 * RIGHT)
         lpddr_1_1 = Text("1", color= MAROON).scale(0.5).shift(2 * RIGHT + 1 * UP)
@@ -225,27 +218,33 @@ class HorizontalBERT(MovingCameraScene):
         dot_b = Dot(0.48 * UP + 4.25 * LEFT)
         dot_c = Dot(0.48 * DOWN + 4.25 * LEFT)
         dot_d = Dot(0.48 * UP + 2.55 * LEFT)
+        dot_e = Dot(0.48 * UP + 0.3 * LEFT)
+        moving_dot = Dot(dot_a.get_center(), color= PURPLE, radius= 0.1)
         
         # Lines for the moving data point
         arc_ab = ArcBetweenPoints(dot_a.get_center(), dot_b.get_center(), angle= PI/6, stroke_width= 2)
         arc_bc = ArcBetweenPoints(dot_b.get_center(), dot_c.get_center(), angle= -PI/6, stroke_width= 2)
         arc_cd = ArcBetweenPoints(dot_c.get_center(), dot_d.get_center(), angle= PI/6, stroke_width= 2)
         arc_da = ArcBetweenPoints(dot_d.get_center(), dot_a.get_center(), angle= PI/1.5, stroke_width= 2)
-
-        moving_dot = Dot(dot_a.get_center(), color= PURPLE, radius= 0.1)
-        
+        arc_de = ArcBetweenPoints(dot_d.get_center(), dot_e.get_center(), angle= PI/6, stroke_width= 2)
         
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         # --- Animating Weight-Swapping --- #
+
+        # Removing 1st set of weight values to begin the animation to show data running
+        self.play(FadeTransform(weight_dic["weight_1"], weight_text))
         
+        self.wait(1)
+
         self.play(Create(lpddr_1_1), Create(lpddr_1_2), Create(lpddr_1_3), Create(lpddr_2_1), Create(lpddr_2_2), Create(lpddr_2_3),
                   Create(lpddr_3_1), Create(lpddr_3_2), Create(lpddr_3_3), Create(lpddr_4_1), Create(lpddr_4_2) ,Create(lpddr_4_3),
                   Create(lpddr_5_1), Create(lpddr_5_2), Create(lpddr_5_3), Create(lpddr_box), Create(lpddr_text))
         
         self.wait(1)
 
+        # Creating the moving data point
         self.play(Create(moving_dot))
 
         # 1st instance of weights being loaded
@@ -272,14 +271,13 @@ class HorizontalBERT(MovingCameraScene):
                                      rate_func= smoothstep, run_time= 1.5))
             i += 1
 
-        self.play(MoveAlongPath(moving_dot, arc_ab), rate_func= smoothstep, run_time= 1)
-        self.play(MoveAlongPath(moving_dot, arc_bc), rate_func= smoothstep, run_time= 0.75)
-        self.play(MoveAlongPath(moving_dot, arc_cd), rate_func= smoothstep, run_time= 1)
-        self.play(MoveAlongPath(moving_dot, arc_da), rate_func= smoothstep, run_time= 1.5)
-
         last_output.move_to(0.25 * LEFT + 0.8 * UP)
         arrow_4_horizontal.move_to(0.25 * LEFT + 0.35 * UP)
-        self.play(Create(last_output), FadeIn(arrow_4_horizontal))
+        self.play(MoveAlongPath(moving_dot, arc_ab), rate_func= smoothstep, run_time= 1)
+        self.play(MoveAlongPath(moving_dot, arc_bc), rate_func= smoothstep, run_time= 0.75)
+        self.play(AnimationGroup(MoveAlongPath(moving_dot, arc_cd), Create(last_output), FadeIn(arrow_4_horizontal), rate_func= smoothstep, run_time= 1.25, lag_ratio= 0))
+        self.play(MoveAlongPath(moving_dot, arc_de), rate_func= smoothstep, run_time= 1)
+
         self.wait(1)
 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

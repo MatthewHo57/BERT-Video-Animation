@@ -172,7 +172,8 @@ class VerticalBERT(MovingCameraScene):
                 lag_ratio= 0.5)
         )
 
-        self.wait(1)
+        # Pause for BERT-Large diagram
+        self.wait(16)
 
 
         # --- Creating VerticalBERT Simple --- #
